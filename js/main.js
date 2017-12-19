@@ -195,7 +195,7 @@ $(function(){
 			//keyに対応したデータを取得
 			value = sessionStorage.getItem("aigis",key);
 			//配列に追加
-			html.push($("<div>").html(value));
+			html.push($("<p>").html(value));
 
 		}
 		//配列に書き出し
