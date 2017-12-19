@@ -41,8 +41,12 @@ $(function(){
 		}else {
 			//既にあるデータに新しいデータを追加する
 			var array2 = JSON.parse(json2);
-			array2.push(realyty);
+				array2.push(realyty);
+				if(array2.length %30 ==0){
+					array2.push("<br>");
+				}
 			Storage.setItem("aigis",JSON.stringify(array2));
+
 		}
 	}
 
@@ -179,16 +183,22 @@ $(function(){
 	};
 	//Storegeの中身を出力
 	var realytyForm = function(){
+		//表示位置取得
 		var list = $("#list");
+		//前回のデータを削除
 		list.children().remove();
 		var key, value, html = [];
+
 		for(var i=0, len=sessionStorage.length; i<len; i++) {
+			//ストレージのi番目のkeyを取得
 			key = sessionStorage.key("aigis",i);
+			//keyに対応したデータを取得
 			value = sessionStorage.getItem("aigis",key);
+			//配列に追加
+			html.push($("<div>").html(value));
 
-			html.push($("<p>").text(value));
 		}
-
+		//配列に書き出し
 		list.append(html);
 		//ユニット画像の読み込み(xml)
 		//loadImages();
