@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>千年戦争アイギス ガチャ結果確率計算機（</title>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-105341140-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<script src="../lib/jquery.min.js"></script>
+<script src="js/jquery.text-with-lf.js"></script>
+<script src="js/main.js"></script>
+<link href="css/styles.css" rel="stylesheet">
+<link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
+<script src="../lib/bootstrap/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../lib/common.css"><!-- 表示の微調整用 -->
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+
+<script src="js/BigNumber.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="form_conf">
+    <h1>プレミアム召喚</h1>
+  </div>
+
+
+    <div class="form-group">
+      <label>消費神聖結晶(初期値5)</label>
+      <input type="number" name="name" id="crystal"  value="5" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label>シルバー＋？(0以下だった場合+1で計算)</label>
+      <input type="number" name="name" id="silver"  value="1" class="form-control" />
+    </div>
+    <button type="button" class="btn btn-primary btn-block" id="callSilver">銀召喚</button>
+    <div class="form-group">
+      <label>ゴールド＋？(0以下だった場合+1で計算)</label>
+      <input type="number" name="name" id="gold"  value="1" class="form-control" />
+    </div>
+    <button type="button" class="btn btn-primary btn-block" id="callGold">金召喚</button>
+    <div class="form-group">
+      <label>プラチナ＋？(0以下だった場合+1で計算)</label>
+      <input type="number" name="name" id="platinum"  value="1" class="form-control" />
+    </div>
+    <button type="button" class="btn btn-primary btn-block" id="callPlatinum">白召喚</button>
+    <div class="form-group">
+      <label>ブラック＋？(0以下だった場合+1で計算)</label>
+      <input type="number" name="name" id="black"  value="1" class="form-control" />
+    </div>
+    <button type="button" class="btn btn-primary btn-block" id="callBlack">黒召喚</button>
+
+    <!-- 三角形 -->
+    <div style="text-align: center; padding: .5em;">
+      <div class="caret" style="text-align: center; border-width: 16px;"></div>
+    </div>
+
+    <!-- 出力テキスト -->
+    <div class="form-group">
+      <label>総消費量</label>
+      <input type="number" id="allCrystal" name="name" value="" class="form-control" />
+    </div>
+    <form class="form-inline">
+    <div class="from-group">
+      <label>黒の確率</label>
+        <input type="number" id="blackAve" name="name" value="" class="form-control" />
+      <label>白銀の確率</label>
+        <input type="number" id="platinumAve" name="name" value="" class="form-control" />
+      <label>金の確率</label>
+          <input type="number" id="goldAve" name="name" value="" class="form-control" />
+      <label>銀の確率</label>
+          <input type="number" id="silverAve" name="name" value="" class="form-control" />
+    </div>
+  </form>
+  <form class="form-inline">
+  <div class="from-group">
+    <label>黒の数</label>
+      <input type="number" id="blackNum" name="name" value="" class="form-control" />
+    <label>白銀の数</label>
+      <input type="number" id="platinumNum" name="name" value="" class="form-control" />
+    <label>金の数</label>
+        <input type="number" id="goldNum" name="name" value="" class="form-control" />
+    <label>銀の数</label>
+        <input type="number" id="silverNum" name="name" value="" class="form-control" />
+  </div>
+</form>
+<button type="button" class="btn btn-primary btn-block" id="reCalc">排出数から確率を再計算</button>
+<button type="button" class="btn btn-primary btn-block" id="reset">結果をリセットする</button>
+  <div class="form-group">
+    <label>総排出数</label>
+      <input type="number" id="allNum" name="name" value="" class="form-control" />
+    </div>
+
+
+  <div class="form_conf">
+    <label>排出したレアリィティ（SessionStorage　リセットボタンで消えます。初回30以後29回ごとに改行)</label>
+      <div>確認画面</div>
+      <p id="list"></p>
+      <li><button type="button" id="check" />確認</li>
+      <li><button type="button" id="refresh" />リセット</li>
+      </ul>
+  </div>
+</div>
+</body>
+</html>
