@@ -18,7 +18,48 @@ $(function(){
 	}
 	//使用した合計金額を計算(推定)
 	var oikuramanen = function(allCrystal){
+			//合計
+			var kei = new BigNumber(0);
+			var x = 0;
+			var kin=0;
+			//1万
+			kei = new BigNumber(allCrystal).div(150).round(0,1);
+			//console.log(kei);
+			kin += kei*10000;
+			//console.log(kin);
+			//5千
+			x = allCrystal%150;
+			kei = new BigNumber(x).round(0,1).div(70).round(0,1);
+			//console.log(kei);
+			kin += kei*5000;
+			//console.log(kin);
+			//2千
+			x = x%70;
+			kei = new BigNumber(x).round(0,1).div(35).round(0,1);
+			//console.log(kei);
+			kin += kei*3000;
+			//console.log(kin);
+			//1000
+			x = x%35;
+			//console.log(x);
+			kei = new BigNumber(x).round(0,1).div(11).round(0,1);
+			//console.log(kei*1);
+			kin += kei*1000;
+			//console.log(kin);
+			//500
+			x = x%11;
+			kei = new BigNumber(x).round(0,1).div(5).round(0,1);
+			//console.log(kei);
+			kin += kei*500;
+			//console.log(kin);
+			//100
+			x = x%5;
+			kei = new BigNumber(x).round(0,1);
+			//console.log(kei);
+			kin += kei*100;
+			//console.log(kin);
 
+			$("#oikuramanen").val(kin);
 	}
 	//画像を表示（Storage）
 	var loadStorageImages = function(){
@@ -41,8 +82,12 @@ $(function(){
 		}else {
 			//既にあるデータに新しいデータを追加する
 			var array2 = JSON.parse(json2);
-			array2.push(realyty);
+				array2.push(realyty);
+				if(array2.length %30 ==0){
+					array2.push("<br>");
+				}
 			Storage.setItem("aigis",JSON.stringify(array2));
+
 		}
 	}
 
@@ -171,24 +216,31 @@ $(function(){
 		// 値の計算
 		var allNum = silverNum+goldNum+platinumNum+blackNum;
 		averageCalc(allNum,silverNum,goldNum,platinumNum,blackNum);
-		oikuramanen(allCrystal);
+
 		//使用した結晶の数を計算　基本５
 		var allCrystal = allNum *5;
+		oikuramanen(allCrystal);
 		//値の出力
 		$("#allCrystal").val(allCrystal);
 	};
 	//Storegeの中身を出力
 	var realytyForm = function(){
+		//表示位置取得
 		var list = $("#list");
+		//前回のデータを削除
 		list.children().remove();
 		var key, value, html = [];
+
 		for(var i=0, len=sessionStorage.length; i<len; i++) {
+			//ストレージのi番目のkeyを取得
 			key = sessionStorage.key("aigis",i);
+			//keyに対応したデータを取得
 			value = sessionStorage.getItem("aigis",key);
+			//配列に追加
+			html.push($("<p>").html(value));
 
-			html.push($("<p>").text(value));
 		}
-
+		//配列に書き出し
 		list.append(html);
 		//ユニット画像の読み込み(xml)
 		//loadImages();
